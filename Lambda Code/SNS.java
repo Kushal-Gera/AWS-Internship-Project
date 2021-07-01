@@ -1,4 +1,3 @@
-package com.example;
 import java.net.URLDecoder;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
