@@ -151,7 +151,8 @@ $(document).ready(function(){
 
         var str = '<ul class="item list-group list-group-flush">'
         mlist.forEach(function(l) {
-          str += '<a class="list-group-item">'+ l['Key'] + '</a>';
+          if(!l['Key'].endsWith('Key'))
+            str += '<a class="list-group-item">'+ l['Key'] + '</a>';
         });
 
         str += '</ul>';
