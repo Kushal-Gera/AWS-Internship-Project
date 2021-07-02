@@ -5,11 +5,11 @@ var s3;
 
 var bucketName = "direct-upload-bucket";
 var destBucketName = "files-encrypted";
-var IdentityPoolId = "";
+var IdentityPoolId = "ap-south-1:d7ece098-1ead-4007-a8d3-bce9a511c62e";
 
 var bucketName2 = "new-bucket-upload";
 var destBucketName2 = "new-bucket-download";
-var IdentityPoolId2 = "";
+var IdentityPoolId2 = "ap-south-1:358775bd-067c-44d2-a2e0-a33021416cd5";
 
 
 function getEventTarget(e) {
@@ -39,20 +39,20 @@ function s3download2(key){
         ContentType: 'String',
         Body: String(key),
         ACL: 'public-read'
-        }, function(err, data) {
-        if(err) {
-        reject('error');
-    }
-
-    if(!alert('Download the file here: https://open-download-bucket.s3.ap-south-1.amazonaws.com/'+key)){
-      $("#progress-down").attr('value', 0);}
-        }).on('httpUploadProgress', function (progress) {
-        var uploaded = parseInt((progress.loaded * 100) / progress.total);
-        $("#progress-down").attr('value', uploaded);
-      });
+    }, function(err, data) {
+        if(err) {reject('error');}
+        if(confirm("Press OK to download - "+key)){
+          window.open('https://open-download-bucket.s3.ap-south-1.amazonaws.com/'+key, '_blank').focus();
+          $("#progress-down").attr('value', 0);
+        }else{
+          $("#progress-down").attr('value', 0);
+        }
+    }).on('httpUploadProgress', function (progress) {
+      var uploaded = parseInt((progress.loaded * 100) / progress.total);
+      $("#progress-down").attr('value', uploaded);
+    });
   }
 }
-
 function s3download(key){
   if(!key) return;
   console.log(key);
@@ -75,17 +75,18 @@ function s3download(key){
         ContentType: 'String',
         Body: String(key),
         ACL: 'public-read'
-        }, function(err, data) {
-        if(err) {
-        reject('error');
-    }
-
-    if(!alert('Download the file here: https://open-download-bucket.s3.ap-south-1.amazonaws.com/'+key)){
-      $("#progress-down").attr('value', 0);}
-        }).on('httpUploadProgress', function (progress) {
-        var uploaded = parseInt((progress.loaded * 100) / progress.total);
-        $("#progress-down").attr('value', uploaded);
-      });
+    }, function(err, data) {
+        if(err) {reject('error');}
+        if(confirm("Press OK to download - "+key)){
+          window.open('https://open-download-bucket.s3.ap-south-1.amazonaws.com/'+key, '_blank').focus();
+          $("#progress-down").attr('value', 0);
+        }else{
+          $("#progress-down").attr('value', 0);
+        }
+    }).on('httpUploadProgress', function (progress) {
+      var uploaded = parseInt((progress.loaded * 100) / progress.total);
+      $("#progress-down").attr('value', uploaded);
+    });
   }
 
 }
